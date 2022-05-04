@@ -2,26 +2,23 @@ name = input("Enter file: ")
 if len(name) < 1:
     name = "mbox-short.txt"
 handle = open(name)
-address = list()
+address=list()
+
 emails = dict()
 for line in handle:
+    line = line.rstrip()
     if line.startswith("From "):
         line = line.split()
-        address = line[1]
+        address.append(line[1])
 
-for addess in line:
-    if address not in emails:
-                emails[address] = emails.get(address, 0) + 1
+for contact in address:
+    emails[contact] =  emails.get(contact, 0) + 1
 
-maxe = 0
-for key in emails:
-    if emails[key] > maxe:
-        maxe = key
-
-print(emails, emails[maxe])
-
-        
-        #emails[address] = emails.get(address, 0) + 1
-        
-#print(emails)
+most = None
+count = None
+for contact in emails:
+    if count == None or count < emails[contact]:
+        most = contact
+        count = emails[contact]
+print(most, count)
 
