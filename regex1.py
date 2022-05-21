@@ -1,13 +1,10 @@
 import re
-name  = input("Enter  file: ")
-if len(name) <1: 
-    name = "regex_sum_42.txt"
-handle = open(name)
+hand = open('mbox-short.txt')
 numlist = list()
-
-for line in handle:
+for line in hand:
     line = line.rstrip()
-    num = re.findall('[0-9]+', line)
-    num = int(num)
+    stuff = re.findall('X-DSPAM-Confidence: ([0-9.]+)', line)
+    if len(stuff) != 1 : continue
+    num = float(stuff[0])
     numlist.append(num)
-print(numlist)
+print('Maximum:', max(numlist))
